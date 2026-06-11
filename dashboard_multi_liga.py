@@ -9,6 +9,27 @@ import psycopg2
 import plotly.graph_objects as go
 import plotly.express as px
 import numpy as np
+import streamlit as st
+# Configuración para producción (Streamlit Cloud)
+if 'DATABASE_URL' in st.secrets:
+    # Usar PostgreSQL en la nube (más adelante)
+    DB_CONFIG = {
+        'dbname': st.secrets['DB_NAME'],
+        'user': st.secrets['DB_USER'],
+        'password': st.secrets['DB_PASSWORD'],
+        'host': st.secrets['DB_HOST']
+    }
+else:
+    # Local
+    DB_CONFIG = {
+        'dbname': 'premier_predictor',
+        'user': 'postgres',
+        'password': 'Sarita2017',
+        'host': 'localhost'
+    }
+
+API_KEY = st.secrets.get('API_KEY', '9e346e18701e4928f7cd1eeee3d8d510')
+
 
 st.set_page_config(page_title="Fútbol Predictor Pro", page_icon="🏆", layout="wide")
 
